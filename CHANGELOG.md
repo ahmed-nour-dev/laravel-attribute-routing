@@ -5,6 +5,19 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `#[WithPermission(...)]` with multiple `Permitted`/`BackedEnum`/string arguments now
+  collapses them into a single "any of" middleware entry (e.g. `permission:a,b`) instead
+  of one middleware per argument, which silently required *all* of them (AND) because
+  Laravel's middleware pipeline is AND, not OR. To require several different permissions
+  (AND), stack `#[WithPermission]` — it is repeatable — so each instance still contributes
+  its own middleware entry. Differently-named middleware within one attribute (e.g. a
+  `Permitted` case and a raw `can:...` string) are unaffected and still AND together, since
+  they can't be OR'd via a single middleware call. ([#1])
+
+[#1]: https://github.com/ahmed-nour-dev/laravel-attribute-routing/issues/1
+
 ## [1.0.1] - 2026-08-20
 
 Metadata only. No code changes.

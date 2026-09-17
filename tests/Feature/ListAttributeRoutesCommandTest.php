@@ -99,7 +99,7 @@ final class ListAttributeRoutesCommandTest extends TestCase
     public function it_reports_how_many_routes_and_classes_were_found(): void
     {
         $this->assertStringContainsString(
-            'Showing [12] routes from [5] scanned classes',
+            'Showing [13] routes from [5] scanned classes',
             $this->runCommand('attribute-routing:list'),
         );
     }

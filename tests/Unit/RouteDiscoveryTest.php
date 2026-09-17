@@ -83,6 +83,15 @@ final class RouteDiscoveryTest extends TestCase
     }
 
     #[Test]
+    public function it_collapses_multiple_permissions_on_one_attribute_into_a_single_any_of_entry(): void
+    {
+        $this->assertSame(
+            ['api', 'auth:sanctum', 'permission:view_leads,edit_lead'],
+            $this->route(LeadController::class, 'audit')->middleware,
+        );
+    }
+
+    #[Test]
     public function it_turns_throttle_into_middleware(): void
     {
         $this->assertContains('throttle:6,1', $this->route(LeadController::class, 'store')->middleware);

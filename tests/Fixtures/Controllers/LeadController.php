@@ -37,6 +37,13 @@ class LeadController
         return 'show';
     }
 
+    #[Get('{lead}/audit', name: 'audit')]
+    #[WithPermission(PermissionEnum::VIEW_LEADS, PermissionEnum::EDIT_LEAD)]
+    public function audit(): string
+    {
+        return 'audit';
+    }
+
     #[Post('', name: 'store')]
     #[WithPermission(PermissionEnum::CREATE_LEAD)]
     #[Throttle(6)]
