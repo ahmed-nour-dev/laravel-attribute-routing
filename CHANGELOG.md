@@ -5,6 +5,8 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-09-17
+
 ### Fixed
 
 - `#[WithPermission(...)]` with multiple `Permitted`/`BackedEnum`/string arguments now
