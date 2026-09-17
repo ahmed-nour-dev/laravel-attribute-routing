@@ -180,7 +180,17 @@ Three forms are accepted:
 - a raw string → passed straight through if it contains a `:` (e.g. `'can:download-audit'`),
   otherwise formatted
 
-Pass several at once: `#[WithPermission(Permission::A, Permission::B)]`.
+Pass several at once for "any of" (OR) semantics — `#[WithPermission(Permission::A, Permission::B)]`
+collapses into a single `permission:a,b` middleware entry, and the user needs only one of them.
+To require several *different* permissions (AND), stack the attribute instead — it's repeatable,
+and each instance contributes its own middleware entry:
+
+```php
+#[WithPermission(Permission::EDIT_TASK)]
+#[WithPermission(Permission::MANAGE_PROJECT)]
+#[Put('{task}', name: 'tasks.update')]
+public function update(Task $task): JsonResponse { /* ... */ }
+```
 
 ## Configuration
 
